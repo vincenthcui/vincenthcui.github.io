@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>八比特</title>
+    <link>https://vincentcui.cn/</link>
+    <description>Recent content on 八比特</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 08 Jun 2020 16:44:05 +0800</lastBuildDate>
+    
+	<atom:link href="https://vincentcui.cn/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>RFB协议中键盘事件（KeyEvent）的处理</title>
+      <link>https://vincentcui.cn/posts/key-event-in-rfb-protocol/</link>
+      <pubDate>Mon, 08 Jun 2020 16:44:05 +0800</pubDate>
+      
+      <guid>https://vincentcui.cn/posts/key-event-in-rfb-protocol/</guid>
+      <description>RFB（remote framebuffer）是用于图形界面远程接入的开源协议，基于C/S架构，在Windows和Linux操作系统下都有服务器和客户端实现，有较好的跨平台特性。本文从协议层入手，探究键盘事件在服务器端和客户端间的传输方式。
+ 在RFC协议中，“按键事件”指键盘被按下（Down）或抬起（Up）的事件。一个键被按下时，该键对应的 down-flag 是非零值；当键抬起时，down-flag 是零值。按键用 X 桌面系统（X Window System）的按键符号（keysym）定义，无论协议两端的操作系统是 Windows 还是 Linux。
+一个按键事件的消息结构如下表：
+ +--------------+--------------+--------------+ | No. of bytes | Type [Value] | Description | +--------------+--------------+--------------+ | 1 | U8 [4] | message-type | | 1 | U8 | down-flag | | 2 | | padding | | 4 | U32 | key | +--------------+--------------+--------------+ 每个按键事件在协议中共占4个字节。第一个字节包括分两部分，第一部分是 message-type，代表该消息的类型，其值为 0x04，长度是 8 bit，由协议固定分配；第二部分是 down-flag，用于表征该键是否被按下。down-flag 是非零值时，表示该键位处于“按下”状态；down-flag 恢复到 0 值时，该键位恢复“抬起”状态。第二个字节空置，用于位对齐，同时也为协议留下了升级的空间。
+第三和第四个字节表示键位信息，键位的符号由 X Window System 定义，具体的值可以参考 XLIBREF 中 &amp;lt;X11/keysymdef.</description>
+    </item>
+    
+  </channel>
+</rss>

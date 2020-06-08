@@ -34,8 +34,8 @@
     <meta property="og:title" content="Posts" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="http://example.org/posts/" />
-<meta property="og:updated_time" content="2020-06-08T14:57:19+08:00" />
+<meta property="og:url" content="https://vincentcui.cn/posts/" />
+<meta property="og:updated_time" content="2020-06-08T16:44:05+08:00" />
 <meta itemprop="name" content="Posts">
 <meta itemprop="description" content=""><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Posts"/>
@@ -101,12 +101,16 @@
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
-      <a href="http://example.org/posts/my-first-post/" class="link black dim">
-        My First Post
+      <a href="https://vincentcui.cn/posts/key-event-in-rfb-protocol/" class="link black dim">
+        RFB协议中键盘事件（KeyEvent）的处理
       </a>
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
-      2333
+      RFB（remote framebuffer）是用于图形界面远程接入的开源协议，基于C/S架构，在Windows和Linux操作系统下都有服务器和客户端实现，有较好的跨平台特性。本文从协议层入手，探究键盘事件在服务器端和客户端间的传输方式。
+ 在RFC协议中，“按键事件”指键盘被按下（Down）或抬起（Up）的事件。一个键被按下时，该键对应的 down-flag 是非零值；当键抬起时，down-flag 是零值。按键用 X 桌面系统（X Window System）的按键符号（keysym）定义，无论协议两端的操作系统是 Windows 还是 Linux。
+一个按键事件的消息结构如下表：
+ +--------------+--------------+--------------+ | No. of bytes | Type [Value] | Description | +--------------+--------------+--------------+ | 1 | U8 [4] | message-type | | 1 | U8 | down-flag | | 2 | | padding | | 4 | U32 | key | +--------------+--------------+--------------+ 每个按键事件在协议中共占4个字节。第一个字节包括分两部分，第一部分是 message-type，代表该消息的类型，其值为 0x04，长度是 8 bit，由协议固定分配；第二部分是 down-flag，用于表征该键是否被按下。down-flag 是非零值时，表示该键位处于“按下”状态；down-flag 恢复到 0 值时，该键位恢复“抬起”状态。第二个字节空置，用于位对齐，同时也为协议留下了升级的空间。
+第三和第四个字节表示键位信息，键位的符号由 X Window System 定义，具体的值可以参考 XLIBREF 中 &lt;X11/keysymdef.
     </div>
   </div>
 </div>
@@ -119,7 +123,7 @@
     </main>
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://example.org/" >
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://vincentcui.cn/" >
     &copy;  八比特 2020 
   </a>
     <div>
